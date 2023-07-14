@@ -1,0 +1,36 @@
+name: Auto Reply to Pull Requests
+
+on:
+  pull_request:
+
+jobs:
+  auto_reply:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Run script
+        id: script
+        run: |
+          # 使用 `github.event.pull_request.changed_files` 获取修改的文件列表
+          modified_files=$(git diff --name-only HEAD $(git merge-base HEAD ${{ github.event.pull_request.base.sha }}))
+          # 提取修改的文件夹路径
+          modified_folders=$(dirname "${modified_files}")
+
+          comment=$(your-script.sh "${modified_folders}")
+
+          echo "$comment"
+          echo "comment=$comment" | tee -a $GITHUB_OUTPUT
+
+      - name: Comment on pull request
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: ${{ steps.script.outputs.comment }}
+            })
