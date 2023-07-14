@@ -31,4 +31,3 @@ jobs:
           filePath: comment.txt
           comment_tag: "Scoring"
           pr_number: ${{ github.event.pull_request.number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
