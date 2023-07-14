@@ -26,9 +26,16 @@ if __name__ == '__main__':
         print('Usage: python scoring.py <files>')
         exit()
 
+    paths = []
+    for arg in sys.argv[1:]:
+        if '\n' in arg:
+            paths.extend(arg.split('\n'))
+        else:
+            paths.append(arg)
+
     min_scores = (0, 0, 0)
     min_path = pathlib.Path()
-    for arg in sys.argv[1:]:
+    for arg in paths:
         path = pathlib.Path(arg)
         if not path.exists():
             print(f'File: {path} does not exist.')
