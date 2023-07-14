@@ -1,13 +1,13 @@
 name: Auto Reply to Pull Requests
 
 on:
-  pull_request:
+  pull_request_target:
 
 jobs:
   auto_reply:
     runs-on: ubuntu-latest
-    permissions: write-all
-
+    permissions:
+      pull-requests: write
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -30,4 +30,3 @@ jobs:
         with:
           filePath: comment.txt
           comment_tag: "Scoring"
-          pr_number: ${{ github.event.pull_request.number }}
