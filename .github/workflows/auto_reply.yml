@@ -6,6 +6,7 @@ on:
 jobs:
   auto_reply:
     runs-on: ubuntu-latest
+    permissions: write-all
 
     steps:
       - name: Check out code
@@ -29,4 +30,3 @@ jobs:
         with:
           filePath: comment.txt
           comment_tag: "Scoring"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
