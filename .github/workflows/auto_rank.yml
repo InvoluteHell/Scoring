@@ -11,7 +11,7 @@ jobs:
 
       - name: Auto Rank
         run: |
-          python3 .github/auto_rank.py
+          python3 .github/rank.py
 
       - uses: actions-js/push@master
         with:
