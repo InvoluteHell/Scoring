@@ -44,14 +44,14 @@ if __name__ == '__main__':
             continue
         scores = file_score(path)
         if not scores:
-            print(f'_File: {path} is not ASCII._')
+            print(f'File: {path} is not ASCII.')
             continue
-        print(f'_File: {path}, Length: {scores[0]}, Category: {scores[1]}, Score: {scores[2]}._')
+        print(f'File: {path}, Length: {scores[0]}, Category: {scores[1]}, Score: {scores[2]}')
         if scores[2] < min_scores[2] or min_scores[2] == 0:
             min_scores = scores
             min_path = path
             
     if min_scores[2] == 0:
-        print(f'\n**No ASCII file in {arg}.**')
+        print(f'\nNo ASCII file in {arg}.')
     else:
-        print(f'\n**Best file: {min_path}, Length: {min_scores[0]}, Category: {min_scores[1]}, Score: {min_scores[2]}.**')
+        print(f'\nBest file: {min_path}, Length: {min_scores[0]}, Category: {min_scores[1]}, Score: {min_scores[2]}')
