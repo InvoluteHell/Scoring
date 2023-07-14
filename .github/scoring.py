@@ -49,7 +49,7 @@ if __name__ == '__main__':
             min_scores = scores
             min_path = path
             
-        if min_scores[2] == 0:
-            print(f'\nNo ASCII file in {arg}.')
-        else:
-            print(f'\nBest file: {min_path}, Length: {min_scores[0]}, Category: {min_scores[1]}, Score: {min_scores[2]}')
+    if min_scores[2] == 0:
+        print(f'\nNo ASCII file in {arg}.')
+    else:
+        print(f'\nBest file: {min_path}, Length: {min_scores[0]}, Category: {min_scores[1]}, Score: {min_scores[2]}')

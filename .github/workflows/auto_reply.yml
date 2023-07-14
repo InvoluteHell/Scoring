@@ -22,15 +22,9 @@ jobs:
           comment=$(python .github/scoring.py "${modified_files}")
 
           echo "$comment"
-          echo "comment=$comment" | tee -a $GITHUB_OUTPUT
+          echo "$comment" > comment.txt
 
       - name: Comment on pull request
-        uses: actions/github-script@v4
+        uses: thollander/actions-comment-pull-request@v2
         with:
-          script: |
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: ${{ steps.script.outputs.comment }}
-            })
+          filePath: comment.txt
