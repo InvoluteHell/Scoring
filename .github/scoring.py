@@ -26,6 +26,8 @@ if __name__ == '__main__':
         print('Usage: python scoring.py <files>')
         exit()
 
+    print('Scoring files...\n')
+
     paths = []
     for arg in sys.argv[1:]:
         if '\n' in arg:
