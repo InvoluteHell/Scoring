@@ -19,7 +19,7 @@ jobs:
           # 提取修改的文件夹路径
           modified_folders=$(dirname "${modified_files}")
 
-          comment=$(your-script.sh "${modified_folders}")
+          comment=$(python .github/scoring.py "${modified_folders}")
 
           echo "$comment"
           echo "comment=$comment" | tee -a $GITHUB_OUTPUT
