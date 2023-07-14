@@ -15,19 +15,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run script
-        id: script
-        run: |
-          modified_files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
-          echo "$modified_files"
+    #   - name: Run script
+    #     id: script
+    #     run: |
+    #       modified_files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
+    #       echo "$modified_files"
 
-          comment=$(python .github/scoring.py "${modified_files}")
+    #       comment=$(python .github/scoring.py "${modified_files}")
 
-          echo "$comment"
-          echo "$comment" > comment.txt
+    #       echo "$comment"
+    #       echo "$comment" > comment.txt
 
       - name: Comment on pull request
         uses: thollander/actions-comment-pull-request@v2
         with:
-          filePath: comment.txt
-          comment_tag: "Scoring"
+          message: "Test test"
+          comment_tag: "test"
