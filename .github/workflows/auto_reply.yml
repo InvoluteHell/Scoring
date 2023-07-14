@@ -7,7 +7,6 @@ jobs:
   auto_reply:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
       pull-requests: write
 
     steps:
@@ -32,4 +31,5 @@ jobs:
         with:
           filePath: comment.txt
           comment_tag: "Scoring"
+          pr_number: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
