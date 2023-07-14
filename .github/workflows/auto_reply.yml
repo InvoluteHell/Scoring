@@ -22,9 +22,9 @@ jobs:
       - name: Run script
         id: script
         run: |
-          echo "Changes: ""${{ steps.changed-files.outputs.all_changed_files }}"
+          echo Changes: ${{ steps.changed-files.outputs.all_changed_files }}
 
-          comment=$(python .github/scoring.py "${{ steps.changed-files.outputs.all_changed_files }}")
+          comment=$(python .github/scoring.py ${{ steps.changed-files.outputs.all_changed_files }})
 
           echo "$comment"
           echo "$comment" > comment.txt
