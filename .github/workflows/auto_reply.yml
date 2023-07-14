@@ -13,15 +13,18 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 2
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v37
 
       - name: Run script
         id: script
         run: |
-          modified_files=$(git diff --name-only HEAD^1 HEAD)
-          echo "$modified_files"
+          echo "Changes: ""${{ steps.changed-files.outputs.all_changed_files }}"
 
-          comment=$(python .github/scoring.py "${modified_files}")
+          comment=$(python .github/scoring.py "${{ steps.changed-files.outputs.all_changed_files }}")
 
           echo "$comment"
           echo "$comment" > comment.txt
