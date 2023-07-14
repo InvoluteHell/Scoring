@@ -22,34 +22,27 @@ def file_score(filename) -> typing.Optional[typing.Tuple[int, int, int]]:
 
 if __name__ == '__main__':
 
-    if len(sys.argv) != 2:
-        print('Usage:\n    python scoring.py <file>\n or\n    python scoring.py <directory>')
+    if len(sys.argv) < 2:
+        print('Usage: python scoring.py <files>')
         exit()
 
-    arg = sys.argv[1]
-    print(f'Working on {arg}')
-
-    if os.path.isfile(arg):
+    min_scores = (0, 0, 0)
+    min_path = pathlib.Path()
+    for arg in sys.argv[1:]:
         path = pathlib.Path(arg)
+        if not path.exists():
+            print(f'File: {path} does not exist.')
+            continue
         scores = file_score(path)
         if not scores:
-            print(f'File: {path.absolute()} is not ASCII.')
-        else:
-            print(f'File: {path.absolute()}, Length: {scores[0]}, Category: {scores[1]}, Score: {scores[2]}')
-    elif os.path.isdir(arg):
-        min_scores = (0, 0, 0)
-        min_path = pathlib.Path()
-        for path in pathlib.Path(arg).glob('**/*'):
-            scores = file_score(path)
-            if not scores:
-                print(f'File: {path.absolute()} is not ASCII.')
-                continue
-            print(f'File: {path.absolute()}, Length: {scores[0]}, Category: {scores[1]}, Score: {scores[2]}')
-            if scores[2] < min_scores[2] or min_scores[2] == 0:
-                min_scores = scores
-                min_path = path
+            print(f'File: {path} is not ASCII.')
+            continue
+        print(f'File: {path}, Length: {scores[0]}, Category: {scores[1]}, Score: {scores[2]}')
+        if scores[2] < min_scores[2] or min_scores[2] == 0:
+            min_scores = scores
+            min_path = path
             
         if min_scores[2] == 0:
             print(f'\nNo ASCII file in {arg}.')
         else:
-            print(f'\nBest file: {min_path.absolute()}, Length: {min_scores[0]}, Category: {min_scores[1]}, Score: {min_scores[2]}')
+            print(f'\nBest file: {min_path}, Length: {min_scores[0]}, Category: {min_scores[1]}, Score: {min_scores[2]}')

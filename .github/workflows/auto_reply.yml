@@ -18,10 +18,8 @@ jobs:
         run: |
           modified_files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
           echo "$modified_files"
-          modified_folder=$(dirname "$(echo "${modified_files}" | head -n 1)")
-          echo "$modified_folder"
 
-          comment=$(python .github/scoring.py "${modified_folder}")
+          comment=$(python .github/scoring.py "${modified_files}")
 
           echo "$comment"
           echo "comment=$comment" | tee -a $GITHUB_OUTPUT
