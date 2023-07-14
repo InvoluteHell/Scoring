@@ -16,8 +16,10 @@ jobs:
         run: |
           # 使用 `github.event.pull_request.changed_files` 获取修改的文件列表
           modified_files=$(git diff --name-only HEAD $(git merge-base HEAD ${{ github.event.pull_request.base.sha }}))
+          echo "$modified_files"
           # 提取修改的文件夹路径
           modified_folders=$(dirname "${modified_files}")
+          echo "$modified_folders"
 
           comment=$(python .github/scoring.py "${modified_folders}")
 

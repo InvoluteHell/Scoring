@@ -27,6 +27,8 @@ if __name__ == '__main__':
         exit()
 
     arg = sys.argv[1]
+    print(f'Working on {arg}')
+
     if os.path.isfile(arg):
         path = pathlib.Path(arg)
         scores = file_score(path)
