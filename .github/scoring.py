@@ -3,10 +3,10 @@ import typing
 import pathlib
 
 
-def file_score(filename: pathlib.Path) -> typing.Optional[typing.Tuple[int, int, int]]:
+def file_score(path: pathlib.Path) -> typing.Optional[typing.Tuple[int, int, int]]:
     """Return the score of a file based on its length and number of used characters."""
     
-    with open(filename, 'r', encoding='utf-8') as f:
+    with open(path, 'r', encoding='utf-8') as f:
         content = f.read()
     
     if not content.isascii():
